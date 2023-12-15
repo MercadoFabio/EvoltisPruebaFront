@@ -1,0 +1,28 @@
+<div class="p-col row-spacing">
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+    <div class="p-grid p-dir-col" style="margin: 2rem;">
+      <div class="p-col" style="margin: 2rem;">
+        <input type="text" placeholder="Name" pInputText formControlName="name" [required]="true" />
+        <div
+        *ngIf="productForm.get('name')?.invalid && (productForm.get('name')?.dirty || productForm.get('name')?.touched)">
+        <small class="p-error" *ngIf="productForm.get('name')?.errors?.['productNameExists']">El nombre ya está
+          registrado en el catálogo.</small>
+      </div>
+      </div>
+      <div class="p-col" style="margin: 2rem;">
+        <p-inputNumber formControlName="price" placeholder="Price" [min]="0"></p-inputNumber>
+      </div>
+      <div class="p-col" style="margin: 2rem;">
+        <p-inputNumber formControlName="quantity" placeholder="Quantity" [min]="0"></p-inputNumber>
+      </div>
+      <div class="p-col" style="margin: 2rem;">
+        <p-dropdown [options]="categories" formControlName="idCategory" optionLabel="name"
+          placeholder="Select categories" optionValue="id"></p-dropdown>
+      </div>
+      <div class="p-col" style="margin: 2rem;">
+        <button pButton type="submit" label="Guardar"></button>
+      </div>
+    </div>
+  </form>
+  <p-toast position="top-center"></p-toast>
+</div>

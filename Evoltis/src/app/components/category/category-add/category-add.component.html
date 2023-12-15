@@ -1,0 +1,21 @@
+<div class="p-col row-spacing">
+  <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+    <div class="p-grid p-dir-col" style="margin: 2rem;">
+      <div class="p-col" style="margin: 2rem;">
+        <input type="text" placeholder="Name" pInputText formControlName="name" [required]="true" />
+        <div
+        *ngIf="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.dirty || categoryForm.get('name')?.touched)">
+        <small class="p-error" *ngIf="categoryForm.get('name')?.errors?.['categoryNameExists']">El nombre ya está
+          registrado en el catálogo.</small>
+      </div>
+      </div>
+      <div class="p-col" style="margin: 2rem;">
+        <textarea pInputTextarea formControlName="description" placeholder="Description"></textarea>
+      </div>
+      <div class="p-col" style="margin: 2rem;">
+        <button pButton type="submit" label="Guardar"></button>
+      </div>
+    </div>
+  </form>
+  <p-toast position="top-center"></p-toast>
+</div>

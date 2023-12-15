@@ -1,0 +1,37 @@
+<p-table [value]="categories">
+  <ng-template pTemplate="caption">
+      <div style="text-align: left;">
+          <form [formGroup]="filterCategory" style="display: flex; justify-content: space-between;">
+              <div>
+                  <input type="text" pInputText formControlName="name" placeholder="Filter by name" />
+              </div>
+              <button pButton pRipple icon="pi pi-send" class="p-button-rounded p-button-primary mr-2"
+                  (click)="addCategory()"></button>
+          </form>
+      </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-category>
+      <tr>
+          <td>{{category.name}}</td>
+          <td>{{category.description}}</td>
+          <td>
+              <button style="margin-right: 1rem;" pButton pRipple icon="pi pi-pencil"
+                  class="p-button-rounded p-button-success mr-2" (click)="editCategory(category)"></button>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                  (click)="deleteCategory(category)"></button>
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
+<p-paginator (onPageChange)="onPageChange($event)" [first]="page" [rows]="pageSize" [totalRecords]="totalRows"
+  [rowsPerPageOptions]="[5, 10, 15]"></p-paginator>
+<p-toast position="top-center"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
